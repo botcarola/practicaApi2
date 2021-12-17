@@ -1,0 +1,11 @@
+{
+  "name": "carrousel",
+  "version": "1.0.0",
+  "description": "\"carrousel for my webpage\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "botcarola",
+  "license": "ISC"
+}
