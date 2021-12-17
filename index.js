@@ -25,31 +25,33 @@ const urlPokemon = async () => {
     console.log(data)
     console.log(data.data)
     carrouselItem.innerHTML = aHTML(data)   
-   
+    
 }        
 
 urlPokemon()
 
-botonSiguiente.onclick = () => (paginaActual++ && urlPokemon())   
+botonSiguiente.onclick = () => (paginaActual++ && urlPokemon())  
 
 botonAnterior.onclick = () => paginaActual !== 1 && (paginaActual-- && urlPokemon())
 
+let busquedaPorInput = ""
 
+const busquedaPokemon = async () => {
+    const respuesta = await fetch(`https://api.pokemontcg.io/v2/cards?q=name:${busquedaPorInput}&pageSize=10&page=${paginaActual}`)
+    const data = await respuesta.json()   
+    carrouselItem.innerHTML = aHTML(data) 
+
+}  
 
 sbmtBusqueda.onclick = (event) => {
-
-    const busquedaPokemon = async () => {
-        const respuesta = await fetch(`https://api.pokemontcg.io/v2/cards?q=name:${inputBusqueda.value}&pageSize=10&page=1`)
-        const data = await respuesta.json()   
-        carrouselItem.innerHTML = aHTML(data) 
-
-    }   
-    
+    busquedaPorInput = inputBusqueda.value       
     busquedaPokemon()
 
 }
 
+botonSiguiente.onclick = () => (paginaActual++ && busquedaPokemon())  
 
+botonAnterior.onclick = () => paginaActual !== 1 && (paginaActual-- && busquedaPokemon()) 
 
 const aHTML = (data) => {
     const arrayReduc = data.data.reduce((acc, elemento) => {
