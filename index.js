@@ -34,6 +34,23 @@ botonSiguiente.onclick = () => (paginaActual++ && urlPokemon())
 
 botonAnterior.onclick = () => paginaActual !== 1 && (paginaActual-- && urlPokemon())
 
+
+
+sbmtBusqueda.onclick = (event) => {
+
+    const busquedaPokemon = async () => {
+        const respuesta = await fetch(`https://api.pokemontcg.io/v2/cards?q=name:${inputBusqueda.value}&pageSize=10&page=1`)
+        const data = await respuesta.json()   
+        carrouselItem.innerHTML = aHTML(data) 
+
+    }   
+    
+    busquedaPokemon()
+
+}
+
+
+
 const aHTML = (data) => {
     const arrayReduc = data.data.reduce((acc, elemento) => {
         return acc + `

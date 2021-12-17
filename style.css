@@ -21,7 +21,7 @@ main {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  width: 70%;
+  width: 100%;
 }
 .carrousel .contenedor .item {
   margin: 10px;
