@@ -3,6 +3,7 @@ const botonAnterior = document.querySelector("#anterior")
 const botonSiguiente = document.querySelector("#siguiente")
 const carrouselItem = document.querySelector(".contenedor")
 const inputBusqueda = document.querySelector("#busqueda")
+const sbmtBusqueda = document.querySelector("#submt")
 
 
 const baseUrlTcg = "https://api.pokemontcg.io/v2/cards" // url base de la api
@@ -19,7 +20,7 @@ let paginaActual = 1
 // async await de la api
 
 const urlPokemon = async () => {    
-    const respuesta = await fetch(`https://api.pokemontcg.io/v2/cards?pageSize=20&page=${paginaActual}`)
+    const respuesta = await fetch(`https://api.pokemontcg.io/v2/cards?pageSize=10&page=${paginaActual}`)
     const data = await respuesta.json()
     console.log(data)
     console.log(data.data)
@@ -30,7 +31,7 @@ const urlPokemon = async () => {
 urlPokemon()
 
 botonSiguiente.onclick = () => (paginaActual++ && urlPokemon())   
-  
+
 botonAnterior.onclick = () => paginaActual !== 1 && (paginaActual-- && urlPokemon())
 
 const aHTML = (data) => {
