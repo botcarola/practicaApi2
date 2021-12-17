@@ -4,6 +4,10 @@ const botonSiguiente = document.querySelector("#siguiente")
 const carrouselItem = document.querySelector(".contenedor")
 const inputBusqueda = document.querySelector("#busqueda")
 const sbmtBusqueda = document.querySelector("#submt")
+const divPaginadoCorriente = document.querySelector(".paginado-corriente")
+const divPaginadoEspecifico = document.querySelector(".paginado-especifico")
+const botonAnteriorBusqueda = document.querySelector("#anterior-e")
+const botonSiguienteBusqueda = document.querySelector("#siguiente-e")
 
 
 const baseUrlTcg = "https://api.pokemontcg.io/v2/cards" // url base de la api
@@ -26,13 +30,14 @@ const urlPokemon = async () => {
     console.log(data.data)
     carrouselItem.innerHTML = aHTML(data)   
     
-}        
-
-urlPokemon()
+}    
 
 botonSiguiente.onclick = () => (paginaActual++ && urlPokemon())  
 
 botonAnterior.onclick = () => paginaActual !== 1 && (paginaActual-- && urlPokemon())
+
+urlPokemon()
+
 
 let busquedaPorInput = ""
 
@@ -44,14 +49,17 @@ const busquedaPokemon = async () => {
 }  
 
 sbmtBusqueda.onclick = (event) => {
+    event.preventDefault()
     busquedaPorInput = inputBusqueda.value       
     busquedaPokemon()
+    divPaginadoCorriente.style.display = "none"
+    divPaginadoEspecifico.style.display = "flex"
 
 }
 
-botonSiguiente.onclick = () => (paginaActual++ && busquedaPokemon())  
+botonSiguienteBusqueda.onclick = () => (paginaActual++ && busquedaPokemon())  
 
-botonAnterior.onclick = () => paginaActual !== 1 && (paginaActual-- && busquedaPokemon()) 
+botonAnteriorBusqueda.onclick = () => paginaActual !== 1 && (paginaActual-- && busquedaPokemon()) 
 
 const aHTML = (data) => {
     const arrayReduc = data.data.reduce((acc, elemento) => {

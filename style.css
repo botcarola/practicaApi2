@@ -58,4 +58,8 @@ label {
   font-size: 30px;
 }
 
+.paginado-especifico {
+  display: none;
+}
+
 /*# sourceMappingURL=style.css.map */
