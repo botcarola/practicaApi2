@@ -5,7 +5,6 @@ const carrouselItem = document.querySelector(".contenedor")
 const inputBusqueda = document.querySelector("#busqueda")
 
 
-
 const baseUrlTcg = "https://api.pokemontcg.io/v2/cards" // url base de la api
 const paginaDos = "https://api.pokemontcg.io/v2/cards?pageSize=250&page=2" // página 2 con query params
 const buscarPorNombre = "https://api.pokemontcg.io/v2/cards?q=name:pikachu" // busqueda por nombre con qp
@@ -28,14 +27,11 @@ const urlPokemon = async () => {
    
 }        
 
-botonSiguiente.onclick = () => {
-    paginaActual++      
-    urlPokemon()
-        
-} 
-
 urlPokemon()
 
+botonSiguiente.onclick = () => (paginaActual++ && urlPokemon())   
+  
+botonAnterior.onclick = () => paginaActual !== 1 && (paginaActual-- && urlPokemon())
 
 const aHTML = (data) => {
     const arrayReduc = data.data.reduce((acc, elemento) => {
